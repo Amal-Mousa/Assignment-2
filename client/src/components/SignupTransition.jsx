@@ -31,7 +31,7 @@ const SignupTransition = () => {
           variant={isBusiness ? 'contained' : 'outlined'}
           sx={{
             width: '100%',
-            marginTop: 8,
+            marginTop: 3,
             marginBottom: 2,
             marginRight: '2%'
           }}
@@ -43,7 +43,7 @@ const SignupTransition = () => {
           variant={isBusiness ? 'outlined' : 'contained'}
           sx={{
             width: '100%',
-            marginTop: 8,
+            marginTop: 3,
             marginBottom: 2,
             marginLeft: '2%'
           }}

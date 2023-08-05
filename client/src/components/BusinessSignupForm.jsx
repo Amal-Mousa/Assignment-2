@@ -5,14 +5,13 @@ import {
   Box,
   Container,
   Grid,
-  Link,
-  Checkbox,
-  FormControlLabel,
-  CssBaseline,
+  Autocomplete,
+  CssBaseline
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import countries from '../constants';
 
-const BusinessSignupForm = () => {
+const IndividualSignupForm = () => {
   const theme = createTheme();
 
   return (
@@ -21,28 +20,23 @@ const BusinessSignupForm = () => {
         <CssBaseline />
         <Box
           sx={{
-            // marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             boxShadow: 3,
             borderRadius: 2,
-            px: 4,
-            py: 6
+            px: 2,
+            py: 1
           }}
         >
           <Typography component='h1' variant='h5'>
-            Busniess Acount
+            Sign up
           </Typography>
-          <Box
-            component='form'
-            noValidate
-            sx={{ mt: 3 }}
-          >
+          <Box component='form' noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
-                  autoComplete='given-name'
+                  autoComplete='company-name'
                   name='firstName'
                   required
                   fullWidth
@@ -51,14 +45,39 @@ const BusinessSignupForm = () => {
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id='lastName'
-                  label='Last Name'
-                  name='lastName'
-                  autoComplete='family-name'
+              <Grid item xs={12}>
+                <Autocomplete
+                  id='country-select-demo'
+                  sx={{ width: '100' }}
+                  options={countries}
+                  autoHighlight
+                  getOptionLabel={(option) => option.label}
+                  renderOption={(props, option) => (
+                    <Box
+                      component='li'
+                      sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                      {...props}
+                    >
+                      <img
+                        loading='lazy'
+                        width='20'
+                        src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                        srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                        alt=''
+                      />
+                      {option.label} ({option.code}) +{option.phone}
+                    </Box>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label='Choose a country'
+                      inputProps={{
+                        ...params.inputProps,
+                        autoComplete: 'new-password' // disable autocomplete and autofill
+                      }}
+                    />
+                  )}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -75,6 +94,17 @@ const BusinessSignupForm = () => {
                 <TextField
                   required
                   fullWidth
+                  id='email'
+                  label='Phone [start with +972]'
+                  name='phone'
+                  autoComplete='number'
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   name='password'
                   label='Password'
                   type='password'
@@ -83,11 +113,14 @@ const BusinessSignupForm = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value='allowExtraEmails' color='primary' />
-                  }
-                  label='I want to receive inspiration, marketing promotions and updates via email.'
+                <TextField
+                  required
+                  fullWidth
+                  name='password'
+                  label='Confirm Password'
+                  type='password'
+                  id='password'
+                  autoComplete='new-password'
                 />
               </Grid>
             </Grid>
@@ -99,13 +132,6 @@ const BusinessSignupForm = () => {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent='flex-end'>
-              <Grid item>
-                <Link href='#' variant='body2'>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
@@ -113,4 +139,4 @@ const BusinessSignupForm = () => {
   );
 };
 
-export default BusinessSignupForm;
+export default IndividualSignupForm;

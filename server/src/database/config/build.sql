@@ -1,5 +1,5 @@
 BEGIN;
-DROP TABLE IF EXISTS users, busines_users, individual_users;
+DROP TABLE IF EXISTS users, business_users, individual_users;
 
 CREATE TABLE
     users (
